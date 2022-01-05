@@ -59,7 +59,7 @@ namespace AuthorizationCianPageTests
             var actualLogin = driver.FindElement(_userLogin).Text;
             createButton.Click();
 
-            Assert.AreEqual(_expectedLogin, actualLogin, "Login is wrong");
+            Assert.AreEqual(_expectedLogin, actualLogin, "Login is wrong or Enter wasn't completed");
         }
 
         [TearDown]
