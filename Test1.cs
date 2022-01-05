@@ -8,16 +8,19 @@ namespace AuthorizationCianPageTests
     {
         private IWebDriver driver;
 
-        private readonly By _SingInButton = By.XPath("//span[normalize-space(text()) = 'Зарегистрироваться']");
+        private readonly By _SingInButton = By.XPath("//span[normalize-space(text()) = 'Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊСЃСЏ']");
         private readonly By _loginInputButton = By.XPath("//input[@name='username']");
         private readonly By _continueButton = By.XPath("//button[@type ='submit']");
         private readonly By _passwordInpudButton = By.XPath("//*[@id='new_password']");
         private readonly By _confirmedPasswordInpudButton = By.XPath("//*[@id='confirmed_password']");
-        private readonly By _createButton = By.XPath("//span[normalize-space(text()) = 'Создать аккаунт']");
+        private readonly By _createButton = By.XPath("//span[normalize-space(text()) = 'РЎРѕР·РґР°С‚СЊ Р°РєРєР°СѓРЅС‚']");
+
+        private readonly By _userLogin = By.XPath("//span[@class='c-header-user-login-full']");
 
         private const string _login = "irinaTrigger@gmail.com";
         private const string _password = "Gfhjkm4040";
         private const string _confirmed_password = "Gfhjkm4040";
+        private const string _expectedLogin = "IrinaTrigger";
 
         [SetUp]
         public void Setup()
@@ -50,11 +53,19 @@ namespace AuthorizationCianPageTests
 
             var createButton = driver.FindElement(_createButton);
             createButton.Click();
+
+            Thread.Sleep(1000);
+
+            var actualLogin = driver.FindElement(_userLogin).Text;
+            createButton.Click();
+
+            Assert.AreEqual(_expectedLogin, actualLogin, "Login is wrong");
         }
 
         [TearDown]
         public void TaerDown()
         {
+            driver.Quit();
         }
 
     }
